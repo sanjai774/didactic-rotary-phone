@@ -1,0 +1,21 @@
+async function getStock() {
+  const symbol = document.getElementById('stockSymbol').value.toUpperCase();
+  const resultDiv = document.getElementById('result');
+
+  if (!symbol) {
+    resultDiv.innerText = "Please enter a stock symbol.";
+    return;
+  }
+
+  try {
+    // Fetch stock price using a free API (demo from Financial Modeling Prep)
+    const response = await fetch(https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=demo);
+    const data = await response.json();
+
+    if (data.length === 0) {
+      resultDiv.innerText = "Stock not found.";
+      return;
+    }
+
+    const price = data[0].price;
+    resultDiv.innerText = Current Price of ${symbol}: $${price};
